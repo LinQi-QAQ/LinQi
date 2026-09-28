@@ -1,7 +1,7 @@
 /* ============================================================
-   简约风个人主页 · 模块化配色版
-   设计语言：整块纯色模块分区 / 低饱和柔和色 / 克制的蓝色点缀
-   字体：优先苹方（苹果设备），Windows 自动回退微软雅黑
+   LinQi · 个人小房间
+   风格：纯文字排版 / 像笔记本与博客 / 暖白纸感
+   字体：苹方优先（苹果设备），Windows 自动回退微软雅黑
    ============================================================ */
 
 * {
@@ -10,211 +10,249 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
-    background-color: #fafaf8;      /* 整体暖白底，未上色的区域用它 */
-    color: #18181b;
-    line-height: 1.8;
+    background-color: #fafaf8;        /* 暖白纸色 */
+    color: #1c1c1e;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* ================= 头部区 ================= */
-.hero {
-    text-align: center;
-    padding: 80px 24px 64px;
+/* 页面容器：窄栏阅读宽度，居中 */
+.page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 24px 32px;
+    min-height: 100vh;
 }
 
-/* 圆形头像：纯色浅蓝底 */
+/* 入场动画 */
+.page > * {
+    animation: fadeUp 0.5s ease both;
+}
+.page > *:nth-child(1) { animation-delay: 0.02s; }
+.page > *:nth-child(2) { animation-delay: 0.08s; }
+.page > *:nth-child(3) { animation-delay: 0.14s; }
+.page > *:nth-child(4) { animation-delay: 0.20s; }
+.page > *:nth-child(5) { animation-delay: 0.26s; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 小头像（仅首页） */
 .avatar {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 28px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background-color: #e0e7ff;
     color: #2563eb;
-    font-size: 36px;
+    font-size: 22px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.12);
+    margin-bottom: 24px;
 }
 
 h1 {
-    font-size: 44px;
+    font-size: 30px;
     font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: #6b6b70;
+    font-size: 14px;
     letter-spacing: 2px;
+    margin-top: 8px;
 }
 
-.tagline {
-    color: #2563eb;
-    font-size: 15px;
-    letter-spacing: 3px;
-    margin-top: 12px;
-}
-
-.bio {
-    color: #71717a;
+.lead {
+    margin-top: 24px;
     font-size: 16px;
-    max-width: 520px;
-    margin: 24px auto 0;
-}
-
-/* ================= 社交胶囊按钮 ================= */
-.socials {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 32px;
-}
-
-.pill {
-    display: inline-block;
-    padding: 8px 22px;
-    border: 1px solid #d9d9d4;
-    border-radius: 999px;
     color: #3f3f46;
-    font-size: 14px;
-    background-color: rgba(255, 255, 255, 0.6);  /* 半透明白，色块上也清晰 */
+}
+
+p {
+    margin-bottom: 16px;
+    font-size: 15.5px;
+    color: #2c2c2e;
+}
+
+/* 小节标题：前面一个安静的 # 号 */
+h2 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 44px 0 14px;
+}
+
+h2::before {
+    content: "# ";
+    color: #b6b6bd;
+    font-weight: 400;
+}
+
+/* ============ 目录（小房间地图） ============ */
+.toc {
+    list-style: none;
+}
+
+.toc li {
+    border-bottom: 1px solid #ececea;
+}
+
+.toc a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 4px;
+    color: #1c1c1e;
     text-decoration: none;
-    transition: all 0.2s ease;
+    font-size: 15.5px;
 }
 
-.pill:hover {
-    border-color: #2563eb;
-    color: #2563eb;
-    background-color: #ffffff;
-}
+.toc a:hover { color: #2563eb; }
 
-/* "待补充"按钮：虚线 + 灰色 */
-.pill-pending {
-    border-style: dashed;
+.toc .hint {
     color: #a1a1aa;
-    cursor: not-allowed;
-}
-
-/* ================= 色块模块 ================= */
-.block {
-    padding: 52px 0;
-}
-
-/* 内容容器：限宽居中 */
-.inner {
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-/* 各模块配色（全部纯色，低饱和柔和色） */
-.block-about    { background-color: #eaf1ff; }   /* 淡蓝 */
-.block-edu      { background-color: #ecf7ee; }   /* 淡绿 */
-.block-skills   { background-color: #fdf6e3; }   /* 淡琥珀 */
-.block-projects { background-color: #f3effc; }   /* 淡紫 */
-.block-contact  { background-color: #ffffff; }   /* 纯白 */
-
-/* 模块标题：蓝色小竖条 + 深色字 */
-.inner h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #18181b;
-    margin-bottom: 18px;
-    border-left: 3px solid #2563eb;
-    padding-left: 12px;
-}
-
-.inner p {
-    color: #52525b;
-    font-size: 15px;
-}
-
-/* ================= 教育经历列表 ================= */
-.list {
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-.list-item {
-    display: flex;
-    gap: 24px;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-.list-left {
-    min-width: 90px;
-}
-
-.period {
     font-size: 13px;
-    color: #8a8a92;
 }
 
-.list-title {
+/* ============ 随笔列表 ============ */
+.note {
+    padding: 18px 0;
+    border-bottom: 1px solid #ececea;
+}
+
+.note h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #27272a;
-}
-
-.list-desc {
-    font-size: 14px;
-    color: #71717a;
-    margin-top: 2px;
-}
-
-/* ================= 技能标签 ================= */
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.tag {
-    font-size: 13px;
-    color: #3f3f46;
-    background-color: rgba(255, 255, 255, 0.75);
-    padding: 6px 16px;
-    border-radius: 6px;
-}
-
-/* 待补充标签：虚线下划线 */
-.tag-pending {
-    background-color: transparent;
-    border: 1px dashed #b8b8b0;
-    color: #9c9ca4;
-}
-
-/* ================= 项目占位 ================= */
-.empty {
-    border: 1px dashed #b8b8b0;
-    border-radius: 10px;
-    padding: 36px 20px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.empty p {
-    color: #9c9ca4;
-    font-size: 14px;
-}
-
-/* ================= 联系我 ================= */
-.contact-note {
     margin-bottom: 4px;
 }
 
-/* ================= 页脚 ================= */
-footer {
-    text-align: center;
-    padding: 40px 24px 32px;
+.note .date {
+    font-size: 13px;
+    color: #a1a1aa;
 }
 
-footer p {
+.note p {
+    font-size: 14.5px;
+    color: #52525b;
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+/* 随笔内部分页按钮 */
+.note-pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 22px;
+    font-size: 13px;
+    color: #6b6b70;
+}
+
+.note-pager button {
+    background: none;
+    border: 1px solid #d9d9d4;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #3f3f46;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.note-pager button:hover:not(:disabled) {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.note-pager button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+/* ============ 作品文字列表 ============ */
+.work {
+    padding: 16px 0;
+    border-bottom: 1px solid #ececea;
+}
+
+.work h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.work h3 a {
+    color: #1c1c1e;
+    text-decoration: none;
+}
+
+.work h3 a:hover { color: #2563eb; }
+
+.work p {
+    font-size: 14px;
+    color: #6b6b70;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+/* ============ 社交链接行 ============ */
+.inline-links {
+    margin-top: 28px;
+    font-size: 15px;
+}
+
+.inline-links a {
+    color: #1c1c1e;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.inline-links a:hover { color: #2563eb; }
+
+/* ============ 翻页导航（页底） ============ */
+.pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid #ececea;
+    font-size: 14px;
+}
+
+.pager a {
+    color: #1c1c1e;
+    text-decoration: none;
+}
+
+.pager a:hover { color: #2563eb; }
+
+.pager .num {
     color: #a1a1aa;
     font-size: 13px;
 }
 
-/* ================= 手机适配 ================= */
+/* ============ 页脚 ============ */
+footer {
+    text-align: center;
+    padding: 28px 0 40px;
+    color: #a1a1aa;
+    font-size: 12.5px;
+}
+
+/* ============ 手机适配 ============ */
 @media (max-width: 480px) {
-    .hero { padding: 60px 20px 44px; }
-    h1 { font-size: 34px; }
-    .block { padding: 40px 0; }
+    .page { padding: 48px 20px 24px; }
+    h1 { font-size: 26px; }
 }

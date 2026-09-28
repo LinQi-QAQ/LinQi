@@ -3,102 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinQi · 个人主页</title>
+    <title>LinQi · 个人小房间</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="LinQi · 个人小房间">
+    <meta property="og:description" content="学生 · 热爱学习与探索">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ================= 头部区（留白区） ================= -->
-    <header class="hero">
-        <!-- 头像：以后有照片，把 LQ 换成 <img src="头像.jpg"> -->
-        <div class="avatar">LQ</div>
-        <h1>LinQi</h1>
-        <p class="tagline">学生 · 热爱学习与探索</p>
-        <p class="bio">
-            你好，我是 LinQi，一名学生。正在学习编程与网页开发，
-            这个网站是我学习和展示作品的第一站，会持续更新。
-        </p>
+<main class="page">
 
-        <!-- 社交入口：只放真实账号；未知的先用待补充占位 -->
-        <div class="socials">
-            <a class="pill" href="https://github.com/XuZhihao1234" target="_blank">GitHub</a>
-            <a class="pill" href="mailto:marcgreen54210122@gmail.com">邮箱</a>
-            <a class="pill pill-pending" href="#" onclick="return false;">微信 · 待补充</a>
-        </div>
-    </header>
+    <div class="avatar">LQ</div>
+    <h1>LinQi</h1>
+    <p class="subtitle">学生 · 热爱学习与探索</p>
 
-    <!-- ================= 关于我 · 淡蓝模块 ================= -->
-    <section class="block block-about">
-        <div class="inner">
-            <h2>关于我</h2>
-            <p>
-                我是 LinQi，一名在校学生，正在学习编程和网页开发。
-                这里会慢慢补充我的学习经历、兴趣和作品，
-                欢迎通过邮箱或 GitHub 和我交流。
-            </p>
-        </div>
-    </section>
+    <p class="lead">
+        欢迎来到我的小房间。我是 LinQi，一名学生，正在学习编程与网页开发。
+        这里没有什么华丽的装饰，就是一间慢慢收拾的小屋——
+        随便走走，看看我最近在想什么、做什么。
+    </p>
 
-    <!-- ================= 教育经历 · 淡绿模块 ================= -->
-    <section class="block block-edu">
-        <div class="inner">
-            <h2>教育经历</h2>
-            <div class="list">
-                <div class="list-item">
-                    <div class="list-left">
-                        <span class="period">待补充</span>
-                    </div>
-                    <div class="list-right">
-                        <div class="list-title">学校名称 · 待补充</div>
-                        <div class="list-desc">专业方向 · 待补充</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h2>这个小房间里有什么</h2>
+    <ul class="toc">
+        <li><a href="about.html">关于我 <span class="hint">认识一下 →</span></a></li>
+        <li><a href="sponsor.html">赞助 <span class="hint">请我喝杯咖啡 →</span></a></li>
+        <li><a href="contact.html">联系我 <span class="hint">交个朋友 →</span></a></li>
+    </ul>
 
-    <!-- ================= 技能与兴趣 · 淡琥珀模块 ================= -->
-    <section class="block block-skills">
-        <div class="inner">
-            <h2>技能与兴趣</h2>
-            <div class="tags">
-                <span class="tag">编程</span>
-                <span class="tag">网页开发</span>
-                <span class="tag">学习</span>
-                <span class="tag">探索</span>
-                <span class="tag tag-pending">待补充</span>
-                <span class="tag tag-pending">待补充</span>
-            </div>
-        </div>
-    </section>
+    <div class="inline-links">
+        <a href="#" onclick="return false;">Twitter / X</a>
+        &nbsp;·&nbsp;
+        <a href="#" onclick="return false;">Telegram</a>
+    </div>
 
-    <!-- ================= 项目与作品 · 淡紫模块 ================= -->
-    <section class="block block-projects">
-        <div class="inner">
-            <h2>项目与作品</h2>
-            <div class="empty">
-                <p>作品整理中，敬请期待…</p>
-                <!-- 以后有作品了，在这里替换成作品卡片 -->
-            </div>
-        </div>
-    </section>
+    <nav class="pager">
+        <span></span>
+        <span class="num">1 / 4</span>
+        <a href="about.html">下一页 →</a>
+    </nav>
 
-    <!-- ================= 联系我 · 纯白模块 ================= -->
-    <section class="block block-contact">
-        <div class="inner">
-            <h2>联系我</h2>
-            <p class="contact-note">想交流、合作或交朋友，欢迎通过这些方式找到我：</p>
-            <div class="socials">
-                <a class="pill" href="mailto:marcgreen54210122@gmail.com">邮箱</a>
-                <a class="pill" href="https://github.com/XuZhihao1234" target="_blank">GitHub</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= 页脚 ================= -->
     <footer>
-        <p>© 2026 LinQi · 由 GitHub Pages 免费托管</p>
+        <p>© 2026 LinQi · 本站由 GitHub Pages 支持</p>
     </footer>
+
+</main>
 
 </body>
 </html>
