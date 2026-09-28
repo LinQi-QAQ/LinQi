@@ -1,9 +1,9 @@
 /* ============================================================
-   简约风个人主页样式
-   设计语言：白底大留白 / 深灰文字 / 一个蓝色点缀 / 细边框
+   简约风个人主页 · 模块化配色版
+   设计语言：整块纯色模块分区 / 低饱和柔和色 / 克制的蓝色点缀
+   字体：优先苹方（苹果设备），Windows 自动回退微软雅黑
    ============================================================ */
 
-/* 全局设置 */
 * {
     margin: 0;
     padding: 0;
@@ -11,142 +11,210 @@
 }
 
 body {
-    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-    background-color: #ffffff;
-    color: #1f2937;          /* 深灰近黑的正文色，比纯黑柔和 */
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+    background-color: #fafaf8;      /* 整体暖白底，未上色的区域用它 */
+    color: #18181b;
     line-height: 1.8;
 }
 
-/* 页面容器：限宽 + 居中，让内容像一张卡片一样舒服 */
-.page {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 60px 24px 30px;
-}
-
-/* ===== 头部区 ===== */
+/* ================= 头部区 ================= */
 .hero {
-    text-align: center;      /* 整体居中，符合名片式设计 */
-    padding-bottom: 48px;
+    text-align: center;
+    padding: 80px 24px 64px;
 }
 
-/* 圆形头像 */
+/* 圆形头像：纯色浅蓝底 */
 .avatar {
     width: 96px;
     height: 96px;
-    margin: 0 auto 24px;     /* auto 让它水平居中 */
+    margin: 0 auto 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #e0e7ff, #dbeafe);
-    /* 淡淡的蓝紫渐变底，不放照片也好看 */
-    color: #2563eb;          /* 点缀色：蓝色 */
+    background-color: #e0e7ff;
+    color: #2563eb;
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.12);
 }
 
-/* 名字：大而清晰 */
 h1 {
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: 2px;
 }
 
-/* 一句话介绍：小字、蓝色、拉宽字距，增加精致感 */
 .tagline {
     color: #2563eb;
-    font-size: 16px;
-    letter-spacing: 2px;
-    margin-top: 10px;
+    font-size: 15px;
+    letter-spacing: 3px;
+    margin-top: 12px;
 }
 
-/* 自我介绍段落：灰色，比正文轻一点 */
 .bio {
-    color: #6b7280;
+    color: #71717a;
     font-size: 16px;
     max-width: 520px;
-    margin: 20px auto 0;
+    margin: 24px auto 0;
 }
 
-/* ===== 社交胶囊按钮 ===== */
+/* ================= 社交胶囊按钮 ================= */
 .socials {
     display: flex;
-    flex-wrap: wrap;         /* 手机窄屏自动换行 */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 32px;
 }
 
 .pill {
     display: inline-block;
-    padding: 8px 20px;
-    border: 1px solid #e5e7eb;   /* 极浅的灰边框 */
-    border-radius: 999px;        /* 大圆角 = 胶囊形状 */
-    color: #374151;
+    padding: 8px 22px;
+    border: 1px solid #d9d9d4;
+    border-radius: 999px;
+    color: #3f3f46;
     font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.6);  /* 半透明白，色块上也清晰 */
     text-decoration: none;
-    transition: all 0.2s ease;   /* 悬停过渡动画 */
+    transition: all 0.2s ease;
 }
 
-/* 鼠标悬停：边框和文字变成蓝色 */
 .pill:hover {
     border-color: #2563eb;
     color: #2563eb;
-    background-color: #f5f8ff;
+    background-color: #ffffff;
 }
 
-/* ===== 内容区块 ===== */
-.section {
-    padding: 36px 0;
-    border-top: 1px solid #f0f0f0;  /* 区块之间用极浅细线分隔 */
+/* "待补充"按钮：虚线 + 灰色 */
+.pill-pending {
+    border-style: dashed;
+    color: #a1a1aa;
+    cursor: not-allowed;
 }
 
-.section h2 {
-    font-size: 18px;
-    color: #111827;
-    margin-bottom: 14px;
-    /* 简约做法：标题前加一个小竖条点缀 */
+/* ================= 色块模块 ================= */
+.block {
+    padding: 52px 0;
+}
+
+/* 内容容器：限宽居中 */
+.inner {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* 各模块配色（全部纯色，低饱和柔和色） */
+.block-about    { background-color: #eaf1ff; }   /* 淡蓝 */
+.block-edu      { background-color: #ecf7ee; }   /* 淡绿 */
+.block-skills   { background-color: #fdf6e3; }   /* 淡琥珀 */
+.block-projects { background-color: #f3effc; }   /* 淡紫 */
+.block-contact  { background-color: #ffffff; }   /* 纯白 */
+
+/* 模块标题：蓝色小竖条 + 深色字 */
+.inner h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 18px;
     border-left: 3px solid #2563eb;
-    padding-left: 10px;
+    padding-left: 12px;
 }
 
-.section p {
-    color: #4b5563;
+.inner p {
+    color: #52525b;
     font-size: 15px;
 }
 
-/* ===== 技能标签 ===== */
+/* ================= 教育经历列表 ================= */
+.list {
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.list-item {
+    display: flex;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.list-left {
+    min-width: 90px;
+}
+
+.period {
+    font-size: 13px;
+    color: #8a8a92;
+}
+
+.list-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #27272a;
+}
+
+.list-desc {
+    font-size: 14px;
+    color: #71717a;
+    margin-top: 2px;
+}
+
+/* ================= 技能标签 ================= */
 .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 6px;
 }
 
 .tag {
     font-size: 13px;
-    color: #374151;
-    background-color: #f3f4f6;   /* 浅灰底 */
-    padding: 5px 14px;
+    color: #3f3f46;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 6px 16px;
     border-radius: 6px;
 }
 
-/* ===== 页脚 ===== */
+/* 待补充标签：虚线下划线 */
+.tag-pending {
+    background-color: transparent;
+    border: 1px dashed #b8b8b0;
+    color: #9c9ca4;
+}
+
+/* ================= 项目占位 ================= */
+.empty {
+    border: 1px dashed #b8b8b0;
+    border-radius: 10px;
+    padding: 36px 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.empty p {
+    color: #9c9ca4;
+    font-size: 14px;
+}
+
+/* ================= 联系我 ================= */
+.contact-note {
+    margin-bottom: 4px;
+}
+
+/* ================= 页脚 ================= */
 footer {
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
+    padding: 40px 24px 32px;
 }
 
 footer p {
-    color: #9ca3af;
+    color: #a1a1aa;
     font-size: 13px;
 }
 
-/* ===== 手机适配：窄屏时适当缩小字号 ===== */
+/* ================= 手机适配 ================= */
 @media (max-width: 480px) {
-    .page { padding: 40px 20px 20px; }
-    h1 { font-size: 32px; }
+    .hero { padding: 60px 20px 44px; }
+    h1 { font-size: 34px; }
+    .block { padding: 40px 0; }
 }

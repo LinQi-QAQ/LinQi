@@ -7,68 +7,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 整个页面内容都包在 page 里，居中、限宽 -->
-    <main class="page">
 
-        <!-- ===== 头部：头像 + 名字 + 一句话介绍 + 社交入口 ===== -->
-        <section class="hero">
-            <!-- 圆形头像占位：以后有照片了，把 LQ 换成 <img src="头像.jpg"> 即可 -->
-            <div class="avatar">LQ</div>
+    <!-- ================= 头部区（留白区） ================= -->
+    <header class="hero">
+        <!-- 头像：以后有照片，把 LQ 换成 <img src="头像.jpg"> -->
+        <div class="avatar">LQ</div>
+        <h1>LinQi</h1>
+        <p class="tagline">学生 · 热爱学习与探索</p>
+        <p class="bio">
+            你好，我是 LinQi，一名学生。正在学习编程与网页开发，
+            这个网站是我学习和展示作品的第一站，会持续更新。
+        </p>
 
-            <h1>LinQi</h1>
-            <!-- tagline：一句话介绍自己的身份 / 领域 -->
-            <p class="tagline">学生 · 热爱学习与探索</p>
+        <!-- 社交入口：只放真实账号；未知的先用待补充占位 -->
+        <div class="socials">
+            <a class="pill" href="https://github.com/XuZhihao1234" target="_blank">GitHub</a>
+            <a class="pill" href="mailto:marcgreen54210122@gmail.com">邮箱</a>
+            <a class="pill pill-pending" href="#" onclick="return false;">微信 · 待补充</a>
+        </div>
+    </header>
 
-            <!-- bio：2~3 句自我介绍 -->
-            <p class="bio">
-                你好，我是 LinQi，一名学生。正在学习编程与网页开发，
-                这个网站是我学习和展示作品的第一站，会持续更新。
-            </p>
-
-            <!-- 社交媒体入口：只保留真实存在的账号，后续可继续补充 -->
-            <div class="socials">
-                <a class="pill" href="https://github.com/XuZhihao1234" target="_blank">GitHub</a>
-                <a class="pill" href="mailto:marcgreen54210122@gmail.com">邮箱</a>
-                <!-- 想加微信/B站/微博等：复制上面一行，改成对应链接即可 -->
-            </div>
-        </section>
-
-        <!-- ===== 关于我 ===== -->
-        <section class="section">
+    <!-- ================= 关于我 · 淡蓝模块 ================= -->
+    <section class="block block-about">
+        <div class="inner">
             <h2>关于我</h2>
             <p>
                 我是 LinQi，一名在校学生，正在学习编程和网页开发。
                 这里会慢慢补充我的学习经历、兴趣和作品，
                 欢迎通过邮箱或 GitHub 和我交流。
             </p>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== 技能 / 兴趣 ===== -->
-        <section class="section">
+    <!-- ================= 教育经历 · 淡绿模块 ================= -->
+    <section class="block block-edu">
+        <div class="inner">
+            <h2>教育经历</h2>
+            <div class="list">
+                <div class="list-item">
+                    <div class="list-left">
+                        <span class="period">待补充</span>
+                    </div>
+                    <div class="list-right">
+                        <div class="list-title">学校名称 · 待补充</div>
+                        <div class="list-desc">专业方向 · 待补充</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 技能与兴趣 · 淡琥珀模块 ================= -->
+    <section class="block block-skills">
+        <div class="inner">
             <h2>技能与兴趣</h2>
             <div class="tags">
                 <span class="tag">编程</span>
                 <span class="tag">网页开发</span>
                 <span class="tag">学习</span>
                 <span class="tag">探索</span>
+                <span class="tag tag-pending">待补充</span>
+                <span class="tag tag-pending">待补充</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== 联系我 ===== -->
-        <section class="section">
+    <!-- ================= 项目与作品 · 淡紫模块 ================= -->
+    <section class="block block-projects">
+        <div class="inner">
+            <h2>项目与作品</h2>
+            <div class="empty">
+                <p>作品整理中，敬请期待…</p>
+                <!-- 以后有作品了，在这里替换成作品卡片 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 联系我 · 纯白模块 ================= -->
+    <section class="block block-contact">
+        <div class="inner">
             <h2>联系我</h2>
-            <p>想交流、合作或交朋友，欢迎通过这些方式找到我：</p>
+            <p class="contact-note">想交流、合作或交朋友，欢迎通过这些方式找到我：</p>
             <div class="socials">
                 <a class="pill" href="mailto:marcgreen54210122@gmail.com">邮箱</a>
                 <a class="pill" href="https://github.com/XuZhihao1234" target="_blank">GitHub</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 页脚：版权信息 -->
-        <footer>
-            <p>© 2026 LinQi · 由 GitHub Pages 免费托管</p>
-        </footer>
+    <!-- ================= 页脚 ================= -->
+    <footer>
+        <p>© 2026 LinQi · 由 GitHub Pages 免费托管</p>
+    </footer>
 
-    </main>
 </body>
 </html>
