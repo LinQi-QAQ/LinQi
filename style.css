@@ -45,18 +45,13 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 小头像（仅首页） */
+/* 头像（仅首页，自动裁成圆形） */
 .avatar {
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    background-color: #e0e7ff;
-    color: #2563eb;
-    font-size: 22px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
+    display: block;
     margin-bottom: 24px;
 }
 
