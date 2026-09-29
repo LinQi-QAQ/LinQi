@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinQi · 个人小房间</title>
+    <title>LinQi · 培养皿</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <meta property="og:title" content="LinQi · 个人小房间">
+    <meta property="og:title" content="LinQi · 培养皿">
     <meta property="og:description" content="我叫 LinQi，欢迎来到培养皿">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
@@ -14,31 +14,18 @@
 
 <main class="page">
 
-    <img class="avatar" src="avatar.jpg" alt="LinQi 的头像">
+    <img class="avatar" src="avatar.jpg" alt="LinQi">
     <h1>LinQi</h1>
 
-    <p class="lead">
-        我叫 LinQi，欢迎来到培养皿。
-    </p>
+    <p class="lead" data-i18n="lead">我叫 LinQi，欢迎来到培养皿。</p>
 
-    <h2>这个小房间里有什么</h2>
+    <h2 data-i18n="toc_what">这个培养皿里有什么</h2>
     <ul class="toc">
-        <li><a href="about.html">关于我 <span class="hint">认识一下 →</span></a></li>
-        <li><a href="sponsor.html">赞助 <span class="hint">请我喝杯咖啡 →</span></a></li>
-        <li><a href="contact.html">联系我 <span class="hint">交个朋友 →</span></a></li>
+        <li><a href="about.html"><span data-i18n="nav_about">关于我</span> <span class="hint" data-i18n="nav_about_hint">认识一下 →</span></a></li>
+        <li><a href="sponsor.html"><span data-i18n="nav_sponsor">赞助</span> <span class="hint" data-i18n="nav_sponsor_hint">请我喝杯咖啡 →</span></a></li>
+        <li><a href="contact.html"><span data-i18n="nav_contact">联系我</span> <span class="hint" data-i18n="nav_contact_hint">交个朋友 →</span></a></li>
+        <li class="toc-more"><span>·····</span></li>
     </ul>
-
-    <div class="inline-links">
-        <a href="https://wa.me/447878702729" target="_blank">WhatsApp</a>
-        &nbsp;·&nbsp;
-        <a href="https://t.me/LinQi_QAQ" target="_blank">Telegram</a>
-    </div>
-
-    <nav class="pager">
-        <span></span>
-        <span class="num">1 / 4</span>
-        <a href="about.html">下一页 →</a>
-    </nav>
 
     <footer>
         <p>© 2026 LinQi</p>
@@ -46,5 +33,6 @@
 
 </main>
 
+<script src="i18n.js"></script>
 </body>
 </html>

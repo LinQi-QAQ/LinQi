@@ -11,58 +11,58 @@
 
 <main class="page">
 
-    <h1>赞助</h1>
-    <p class="subtitle">sponsor · 请我喝杯咖啡</p>
+    <h1 data-i18n="sponsor_title">赞助</h1>
+    <p class="subtitle">sponsor · buy me a coffee</p>
 
-    <p>
-        如果你喜欢这个小房间，或者觉得这里的内容对你有帮助，
+    <p data-i18n="sponsor_intro">
+        如果你喜欢这个培养皿，或者觉得这里的内容对你有帮助，
         可以请我喝杯咖啡。你的支持会让我更有动力把这里继续做下去，谢谢。
     </p>
 
     <!-- ① 选择赞助方式 -->
     <div id="choose">
-        <p class="step">选择赞助方式</p>
+        <p class="step" data-i18n="choose_method">选择赞助方式</p>
         <div class="opt-group">
-            <button class="choice" id="goCrypto">虚拟货币</button>
-            <button class="choice" id="goWechat">微信赞赏码</button>
+            <button class="choice" id="goCrypto" data-i18n="go_crypto">虚拟货币</button>
+            <button class="choice" id="goWechat" data-i18n="go_wechat">微信赞赏码</button>
         </div>
     </div>
 
     <!-- ② 虚拟货币面板 -->
     <div id="cryptoPanel" hidden>
-        <a href="#" class="back" data-back>← 返回选择赞助方式</a>
+        <a href="#" class="back" data-back data-i18n="back">← 返回选择赞助方式</a>
 
-        <p class="step">第一步：选择网络</p>
-        <div class="opt-group" id="networks">
-            <button class="opt active" data-net="TRC20">TRC20</button>
-            <button class="opt" data-net="BEP20">BNB Smart Chain</button>
-        </div>
-
-        <p class="step">第二步：选择货币</p>
+        <p class="step" data-i18n="step1">第一步：选择货币</p>
         <div class="opt-group" id="coins">
             <button class="opt active" data-coin="USDT">USDT</button>
             <button class="opt" data-coin="USDC">USDC</button>
         </div>
 
+        <p class="step" data-i18n="step2">第二步：选择网络</p>
+        <div class="opt-group" id="networks">
+            <button class="opt active" data-net="TRC20">TRC20</button>
+            <button class="opt" data-net="BEP20">BNB Smart Chain</button>
+        </div>
+
         <div class="addr-box">
             <div class="addr-label" id="addrLabel">TRC20 · USDT</div>
             <div class="addr-value" id="addrValue">待补充</div>
-            <button class="copy-btn" id="copyBtn">复制地址</button>
+            <button class="copy-btn" id="copyBtn" data-i18n="copy">复制地址</button>
         </div>
     </div>
 
     <!-- ③ 微信赞赏码面板 -->
     <div id="wechatPanel" hidden>
-        <a href="#" class="back" data-back>← 返回选择赞助方式</a>
+        <a href="#" class="back" data-back data-i18n="back">← 返回选择赞助方式</a>
         <div class="wechat-qr">
             <img src="wechat-qr.png" alt="微信赞赏码">
         </div>
     </div>
 
     <nav class="pager">
-        <a href="about.html">← 上一页</a>
-        <span class="num">3 / 4</span>
-        <a href="contact.html">下一页 →</a>
+        <a href="about.html" class="pager-btn" data-i18n="prev">← 上一页</a>
+        <a href="index.html" class="pager-btn" data-i18n="home_short">首页</a>
+        <a href="contact.html" class="pager-btn" data-i18n="next">下一页 →</a>
     </nav>
 
     <footer>
@@ -71,6 +71,7 @@
 
 </main>
 
+<script src="i18n.js"></script>
 <script>
 // 面板切换：先选方式，再进对应界面
 const choose = document.getElementById('choose');
@@ -93,7 +94,7 @@ document.querySelectorAll('[data-back]').forEach(b => b.onclick = (e) => {
     wechatPanel.hidden = true;
 });
 
-// 地址表：以后把每个网络 + 货币对应的真实地址填进去即可
+// 地址表
 const addresses = {
     TRC20: { USDT: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV", USDC: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV" },
     BEP20: { USDT: "0xB69393291027452583Fe5D22BD3405a9F687B472", USDC: "0xB69393291027452583Fe5D22BD3405a9F687B472" }
@@ -122,18 +123,35 @@ function bindGroup(groupId, attr, setter) {
 bindGroup('networks', 'data-net', v => net = v);
 bindGroup('coins', 'data-coin', v => coin = v);
 
+// 复制：优先用新 API，手机浏览器不支持时回退到老办法
 document.getElementById('copyBtn').onclick = () => {
     const v = addresses[net][coin];
-    if (v && v !== "待补充" && navigator.clipboard) {
-        navigator.clipboard.writeText(v).then(() => {
-            document.getElementById('copyBtn').textContent = '已复制 ✓';
-            setTimeout(() => document.getElementById('copyBtn').textContent = '复制地址', 1500);
-        });
+    if (!v || v === "待补充") return;
+    const done = () => {
+        const cb = document.getElementById('copyBtn');
+        cb.textContent = I18N[currentLang].copied;
+        setTimeout(() => cb.textContent = I18N[currentLang].copy, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(v).then(done).catch(() => fallbackCopy(v, done));
+    } else {
+        fallbackCopy(v, done);
     }
 };
 
+// 兼容手机浏览器的复制方式
+function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+}
+
 render();
 </script>
-
 </body>
 </html>
