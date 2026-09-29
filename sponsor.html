@@ -19,31 +19,44 @@
         可以请我喝杯咖啡。你的支持会让我更有动力把这里继续做下去，谢谢。
     </p>
 
-    <h2>加密货币</h2>
-
-    <p class="step">第一步：选择网络</p>
-    <div class="opt-group" id="networks">
-        <button class="opt active" data-net="TRC20">TRC20（波场）</button>
-        <button class="opt" data-net="ERC20">ERC20（以太坊）</button>
-        <button class="opt" data-net="BEP20">BEP20（BSC）</button>
+    <!-- ① 选择赞助方式 -->
+    <div id="choose">
+        <p class="step">选择赞助方式</p>
+        <div class="opt-group">
+            <button class="choice" id="goCrypto">虚拟货币</button>
+            <button class="choice" id="goWechat">微信赞赏码</button>
+        </div>
     </div>
 
-    <p class="step">第二步：选择货币</p>
-    <div class="opt-group" id="coins">
-        <button class="opt active" data-coin="USDT">USDT</button>
-        <button class="opt" data-coin="USDC">USDC</button>
+    <!-- ② 虚拟货币面板 -->
+    <div id="cryptoPanel" hidden>
+        <a href="#" class="back" data-back>← 返回选择赞助方式</a>
+
+        <p class="step">第一步：选择网络</p>
+        <div class="opt-group" id="networks">
+            <button class="opt active" data-net="TRC20">TRC20</button>
+            <button class="opt" data-net="BEP20">BNB Smart Chain</button>
+        </div>
+
+        <p class="step">第二步：选择货币</p>
+        <div class="opt-group" id="coins">
+            <button class="opt active" data-coin="USDT">USDT</button>
+            <button class="opt" data-coin="USDC">USDC</button>
+        </div>
+
+        <div class="addr-box">
+            <div class="addr-label" id="addrLabel">TRC20 · USDT</div>
+            <div class="addr-value" id="addrValue">待补充</div>
+            <button class="copy-btn" id="copyBtn">复制地址</button>
+        </div>
     </div>
 
-    <div class="addr-box">
-        <div class="addr-label" id="addrLabel">TRC20 · USDT</div>
-        <div class="addr-value" id="addrValue">待补充</div>
-        <button class="copy-btn" id="copyBtn">复制地址</button>
-    </div>
-
-    <h2>微信赞赏码</h2>
-    <div class="wechat-qr">
-        <!-- 赞赏码图片发来后，把下面这行注释换成 <img src="wechat-qr.jpg" alt="微信赞赏码"> -->
-        <p>微信赞赏码 · 待上传</p>
+    <!-- ③ 微信赞赏码面板 -->
+    <div id="wechatPanel" hidden>
+        <a href="#" class="back" data-back>← 返回选择赞助方式</a>
+        <div class="wechat-qr">
+            <img src="wechat-qr.png" alt="微信赞赏码">
+        </div>
     </div>
 
     <nav class="pager">
@@ -53,23 +66,44 @@
     </nav>
 
     <footer>
-        <p>© 2026 LinQi · 本站由 GitHub Pages 支持</p>
+        <p>© 2026 LinQi</p>
     </footer>
 
 </main>
 
 <script>
+// 面板切换：先选方式，再进对应界面
+const choose = document.getElementById('choose');
+const cryptoPanel = document.getElementById('cryptoPanel');
+const wechatPanel = document.getElementById('wechatPanel');
+
+function show(panel) {
+    choose.hidden = true;
+    cryptoPanel.hidden = true;
+    wechatPanel.hidden = true;
+    panel.hidden = false;
+}
+
+document.getElementById('goCrypto').onclick = () => show(cryptoPanel);
+document.getElementById('goWechat').onclick = () => show(wechatPanel);
+document.querySelectorAll('[data-back]').forEach(b => b.onclick = (e) => {
+    e.preventDefault();
+    choose.hidden = false;
+    cryptoPanel.hidden = true;
+    wechatPanel.hidden = true;
+});
+
 // 地址表：以后把每个网络 + 货币对应的真实地址填进去即可
 const addresses = {
-    TRC20: { USDT: "待补充", USDC: "待补充" },
-    ERC20: { USDT: "待补充", USDC: "待补充" },
-    BEP20: { USDT: "待补充", USDC: "待补充" }
+    TRC20: { USDT: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV", USDC: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV" },
+    BEP20: { USDT: "0xB69393291027452583Fe5D22BD3405a9F687B472", USDC: "0xB69393291027452583Fe5D22BD3405a9F687B472" }
 };
 
 let net = "TRC20", coin = "USDT";
+const netNames = { TRC20: "TRC20", BEP20: "BNB Smart Chain" };
 
 function render() {
-    document.getElementById('addrLabel').textContent = net + ' · ' + coin;
+    document.getElementById('addrLabel').textContent = netNames[net] + ' · ' + coin;
     document.getElementById('addrValue').textContent = addresses[net][coin];
 }
 

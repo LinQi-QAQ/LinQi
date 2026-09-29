@@ -228,10 +228,44 @@ h2::before {
 
 .opt:hover { border-color: #2563eb; color: #2563eb; }
 
+/* 赞助方式大按钮 */
+.choice {
+    background: none;
+    border: 1px solid #1c1c1e;
+    border-radius: 12px;
+    padding: 18px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #1c1c1e;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+.choice:hover {
+    background-color: #1c1c1e;
+    color: #ffffff;
+}
+
+/* 面板返回链接 */
+.back {
+    display: inline-block;
+    font-size: 13px;
+    color: #8a8a92;
+    text-decoration: none;
+    margin-bottom: 18px;
+}
+
+.back:hover { color: #2563eb; }
+
 .opt.active {
     background-color: #1c1c1e;
     border-color: #1c1c1e;
     color: #ffffff;
+}
+
+.opt:disabled {
+    opacity: 0.35;
+    cursor: default;
 }
 
 /* 地址展示框 */
