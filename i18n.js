@@ -34,6 +34,9 @@ const I18N = {
     step2: "第二步：选择网络",
     copy: "复制地址",
     copied: "已复制 ✓",
+    go_supporters: "赞助者名单",
+    supporters_title: "感谢每一位支持者",
+    supporters_empty: "还没有赞助者，成为第一个支持我的人吧",
     contact_intro: "想交流、合作，或者只是打个招呼，可以通过下面的方式找到我。"
   },
 
@@ -66,6 +69,9 @@ const I18N = {
     step2: "第二步：選擇網路",
     copy: "複製位址",
     copied: "已複製 ✓",
+    go_supporters: "贊助者名單",
+    supporters_title: "感謝每一位支持者",
+    supporters_empty: "還沒有贊助者，成為第一個支持我的人吧",
     contact_intro: "想交流、合作，或者只是打個招呼，可以透過下面的方式找到我。"
   },
 
@@ -98,6 +104,9 @@ const I18N = {
     step2: "Step 2: Choose network",
     copy: "Copy",
     copied: "Copied ✓",
+    go_supporters: "Supporters",
+    supporters_title: "Thanks to every supporter",
+    supporters_empty: "No supporters yet — be the first to support me!",
     contact_intro: "Want to chat, collaborate, or just say hi? Reach me below."
   }
 };

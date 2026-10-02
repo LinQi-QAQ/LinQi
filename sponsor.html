@@ -26,6 +26,7 @@
             <button class="choice" id="goCrypto" data-i18n="go_crypto">虚拟货币</button>
             <button class="choice" id="goWechat" data-i18n="go_wechat">微信赞赏码</button>
         </div>
+        <p class="foot-note"><a href="#" class="supporters-link" id="goSupporters" data-i18n="go_supporters">赞助者名单</a></p>
     </div>
 
     <!-- ② 虚拟货币面板 -->
@@ -59,6 +60,13 @@
         </div>
     </div>
 
+    <!-- ④ 赞助者名单面板 -->
+    <div id="supportersPanel" hidden>
+        <a href="#" class="back" data-back data-i18n="back">← 返回选择赞助方式</a>
+        <p class="step" data-i18n="supporters_title">感谢每一位支持者</p>
+        <div id="supportersList"></div>
+    </div>
+
     <nav class="pager">
         <a href="about.html" class="pager-btn" data-i18n="prev">← 上一页</a>
         <a href="index.html" class="pager-btn" data-i18n="home_short">首页</a>
@@ -72,27 +80,81 @@
 </main>
 
 <script src="i18n.js"></script>
+<script src="sponsors.js"></script>
 <script>
 // 面板切换：先选方式，再进对应界面
 const choose = document.getElementById('choose');
 const cryptoPanel = document.getElementById('cryptoPanel');
 const wechatPanel = document.getElementById('wechatPanel');
+const supportersPanel = document.getElementById('supportersPanel');
 
 function show(panel) {
     choose.hidden = true;
     cryptoPanel.hidden = true;
     wechatPanel.hidden = true;
+    supportersPanel.hidden = true;
     panel.hidden = false;
 }
 
 document.getElementById('goCrypto').onclick = () => show(cryptoPanel);
 document.getElementById('goWechat').onclick = () => show(wechatPanel);
+document.getElementById('goSupporters').onclick = (e) => {
+    e.preventDefault();
+    show(supportersPanel);
+    renderSupporters();
+};
 document.querySelectorAll('[data-back]').forEach(b => b.onclick = (e) => {
     e.preventDefault();
     choose.hidden = false;
     cryptoPanel.hidden = true;
     wechatPanel.hidden = true;
+    supportersPanel.hidden = true;
 });
+
+// 赞助者名单渲染
+function renderSupporters() {
+    const list = document.getElementById('supportersList');
+    list.innerHTML = '';
+    if (!SPONSORS || SPONSORS.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-tip';
+        empty.setAttribute('data-i18n', 'supporters_empty');
+        empty.textContent = I18N[currentLang].supporters_empty;
+        list.appendChild(empty);
+        return;
+    }
+    SPONSORS.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'supporter-card';
+
+        const head = document.createElement('div');
+        head.className = 'supporter-head';
+        const name = document.createElement('span');
+        name.className = 'supporter-name';
+        name.textContent = s.name || '???';
+        const amount = document.createElement('span');
+        amount.className = 'supporter-amount';
+        amount.textContent = s.amount || '';
+        head.appendChild(name);
+        head.appendChild(amount);
+
+        const date = document.createElement('div');
+        date.className = 'supporter-date';
+        date.textContent = s.date || '';
+
+        card.appendChild(head);
+        card.appendChild(date);
+
+        if (s.message) {
+            const msg = document.createElement('div');
+            msg.className = 'supporter-msg';
+            msg.textContent = s.message;
+            card.appendChild(msg);
+        }
+
+        list.appendChild(card);
+    });
+}
 
 // 地址表
 const addresses = {
