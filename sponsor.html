@@ -33,20 +33,14 @@
     <div id="cryptoPanel" hidden>
         <a href="#" class="back" data-back data-i18n="back">← 返回选择赞助方式</a>
 
-        <p class="step" data-i18n="step1">第一步：选择货币</p>
-        <div class="opt-group" id="coins">
-            <button class="opt active" data-coin="USDT">USDT</button>
-            <button class="opt" data-coin="USDC">USDC</button>
-        </div>
-
-        <p class="step" data-i18n="step2">第二步：选择网络</p>
+        <p class="step" data-i18n="choose_network">选择网络</p>
         <div class="opt-group" id="networks">
             <button class="opt active" data-net="TRC20">TRC20</button>
             <button class="opt" data-net="BEP20">BNB Smart Chain</button>
         </div>
 
         <div class="addr-box">
-            <div class="addr-label" id="addrLabel">TRC20 · USDT</div>
+            <div class="addr-label" id="addrLabel">TRC20 · USDT / USDC</div>
             <div class="addr-value" id="addrValue">待补充</div>
             <button class="copy-btn" id="copyBtn" data-i18n="copy">复制地址</button>
         </div>
@@ -156,18 +150,18 @@ function renderSupporters() {
     });
 }
 
-// 地址表
+// 地址表：USDT 和 USDC 共用同一个收款地址，所以只按网络区分
 const addresses = {
-    TRC20: { USDT: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV", USDC: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV" },
-    BEP20: { USDT: "0xB69393291027452583Fe5D22BD3405a9F687B472", USDC: "0xB69393291027452583Fe5D22BD3405a9F687B472" }
+    TRC20: "TScamen5YWCWuiZjBQjHaEaWkYiZEp6DJV",
+    BEP20: "0xB69393291027452583Fe5D22BD3405a9F687B472"
 };
 
-let net = "TRC20", coin = "USDT";
+let net = "TRC20";
 const netNames = { TRC20: "TRC20", BEP20: "BNB Smart Chain" };
 
 function render() {
-    document.getElementById('addrLabel').textContent = netNames[net] + ' · ' + coin;
-    document.getElementById('addrValue').textContent = addresses[net][coin];
+    document.getElementById('addrLabel').textContent = netNames[net] + ' · USDT / USDC';
+    document.getElementById('addrValue').textContent = addresses[net];
 }
 
 function bindGroup(groupId, attr, setter) {
@@ -183,11 +177,10 @@ function bindGroup(groupId, attr, setter) {
 }
 
 bindGroup('networks', 'data-net', v => net = v);
-bindGroup('coins', 'data-coin', v => coin = v);
 
 // 复制：优先用新 API，手机浏览器不支持时回退到老办法
 document.getElementById('copyBtn').onclick = () => {
-    const v = addresses[net][coin];
+    const v = addresses[net];
     if (!v || v === "待补充") return;
     const done = () => {
         const cb = document.getElementById('copyBtn');

@@ -395,6 +395,12 @@ h2::before {
 
 .inline-links a:hover { color: #2563eb; }
 
+/* 联系方式后面的小字备注 */
+.inline-links .link-note {
+    font-size: 13px;
+    color: #8a8a92;
+}
+
 /* ============ 翻页导航（页底） ============ */
 .pager {
     display: flex;
