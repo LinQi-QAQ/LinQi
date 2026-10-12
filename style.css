@@ -40,9 +40,23 @@ body {
 .page > *:nth-child(4) { animation-delay: 0.20s; }
 .page > *:nth-child(5) { animation-delay: 0.26s; }
 
+/* 页底翻页栏与页脚单独指定延迟。
+   原因：nth-child 的序号会被隐藏元素占掉（赞助页中间有三个 hidden 面板），
+   排在第六位之后的元素拿不到延迟，反而最先出现，造成入场顺序错乱。
+   按类名指定可以绕开序号问题。这两条必须写在 nth-child 之后才能覆盖生效。 */
+.page > .pager { animation-delay: 0.30s; }
+.page > footer { animation-delay: 0.36s; }
+
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 只淡入、不位移。用于嵌套在已有入场动画内部的元素，
+   避免父子两层同时位移、叠加成双倍距离 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 /* 头像（仅首页，自动裁成圆形） */
@@ -117,6 +131,32 @@ h2::before {
 .toc .hint {
     color: #a1a1aa;
     font-size: 13px;
+}
+
+/* 目录逐条浮现：像东西一个一个在培养皿里长出来。
+   ul.toc 自身是 .page 的第五个子元素，0.26s 才开始淡入，
+   所以这里从 0.30s 起、每条间隔 0.06s，正好接在它后面。
+   用 fadeIn 而不是 fadeUp，避免和父层的位移叠加。 */
+.toc li {
+    animation: fadeIn 0.4s ease both;
+}
+
+.toc li:nth-child(1) { animation-delay: 0.30s; }
+.toc li:nth-child(2) { animation-delay: 0.36s; }
+.toc li:nth-child(3) { animation-delay: 0.42s; }
+.toc li:nth-child(4) { animation-delay: 0.48s; }
+
+/* 目录末尾的省略号缓慢呼吸，暗示这里还会继续长东西。
+   放在内层 span 上，避免和外层 li 的淡入动画互相覆盖。
+   0.9s 的起始延迟是等第四条 li 淡入结束（0.48 + 0.4）之后再开始。 */
+.toc-more span {
+    display: inline-block;
+    animation: breathe 4s ease-in-out 0.9s infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 1; }
 }
 
 /* ============ 随笔列表 ============ */
@@ -348,6 +388,22 @@ h2::before {
     margin-bottom: 12px;
 }
 
+/* 赞助者卡片逐张浮现。卡片是点开名单那一刻由脚本新建的，
+   所以动画会从新建时开始播放，正好形成依次出现的效果。
+   只列到第十张，再往后的卡片直接出现，名单很长时不必等太久。 */
+#supportersList .supporter-card { animation: fadeIn 0.4s ease both; }
+
+#supportersList .supporter-card:nth-child(1)  { animation-delay: 0.04s; }
+#supportersList .supporter-card:nth-child(2)  { animation-delay: 0.10s; }
+#supportersList .supporter-card:nth-child(3)  { animation-delay: 0.16s; }
+#supportersList .supporter-card:nth-child(4)  { animation-delay: 0.22s; }
+#supportersList .supporter-card:nth-child(5)  { animation-delay: 0.28s; }
+#supportersList .supporter-card:nth-child(6)  { animation-delay: 0.34s; }
+#supportersList .supporter-card:nth-child(7)  { animation-delay: 0.40s; }
+#supportersList .supporter-card:nth-child(8)  { animation-delay: 0.46s; }
+#supportersList .supporter-card:nth-child(9)  { animation-delay: 0.52s; }
+#supportersList .supporter-card:nth-child(10) { animation-delay: 0.58s; }
+
 .supporter-head {
     display: flex;
     justify-content: space-between;
@@ -472,4 +528,23 @@ footer {
     background-color: #1c1c1e;
     border-color: #1c1c1e;
     color: #ffffff;
+}
+
+/* ============ 尊重系统的"减少动态效果"设置 ============
+   有些用户开启这个选项，是因为动画会让他们头晕或不适。
+   本站所有入场与循环动画的结束状态都等于元素的自然状态
+   （fadeUp / fadeIn 结束时 opacity 为 1、位移为 0），
+   所以直接取消动画不会让任何内容消失或错位。
+   这段必须放在文件最后，才能覆盖前面所有规则。 */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
